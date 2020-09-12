@@ -8,12 +8,12 @@ import (
 	"net/http"
 	"time"
 
-	"../../db/db"
+	db "../../db"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
-	UserId    string
+	UserID    string
 	Username  string
 	Password  string
 	CreatedAt time.Time
@@ -42,9 +42,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	// assign more fields to User struct
 	u.CreatedAt = time.Now()
 	u.UpdatedAt = time.Now()
-	u.UserId = "oemrsdaJSDAGJ%#(#@"
+	u.UserID = "oemrsdaJSDAGJ%#(#@"
 	u.Password = string(hash)
-	res, err := db.Init().Collection("users").InsertOne(context.Background(), u)
+	res, err := db.ConnectMongoDB().Collection("users").InsertOne(context.Background(), u)
 	log.Println(err)
 	log.Println(res)
 }

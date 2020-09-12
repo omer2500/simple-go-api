@@ -5,8 +5,9 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func getRoutes() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/", user.CreateUser).Methods("POST")
-	return r
+// GetRoutes - init the routers for the api
+func GetRoutes() *mux.Router {
+	router := mux.NewRouter()
+	router.HandleFunc("/", user.CreateUser).Methods("POST")
+	return router
 }
